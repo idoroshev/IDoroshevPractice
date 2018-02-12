@@ -1,0 +1,11 @@
+commit 33af4c42e31c1bf5ec9f612b36eff297e4fee069 (HEAD -> master)
+Author: Igor Doroshev <igdor9399@gmail.com>
+Date:   Mon Feb 12 16:08:27 2018 +0300
+
+    add status.txt
+
+commit 56d91c4ac3fc28d1a44b3c7fd1deec0542f7b6c4
+Author: Igor Doroshev <igdor9399@gmail.com>
+Date:   Mon Feb 12 15:51:02 2018 +0300
+
+    add .gitignore
