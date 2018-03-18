@@ -54,6 +54,26 @@
 			return null;
 		}
 
+		getAuthors() {
+			let authors = new Set();
+			posts.filter(post => {
+				if (!authors.has(post.author))
+					authors.add(post.author);
+			});
+			return authors;
+		}
+
+		getHashtags() {
+			let hashtags = new Set();
+			posts.filter(post => {
+				post.hashtags.forEach(hashtag => {
+					if (!hashtags.has(hashtag))
+						hashtags.add(hashtag);
+				});
+			});
+			return hashtags;
+		}
+
 		validatePhotoPost(post) {
 			for (let key in this.template) {
 				if (!post.hasOwnProperty(key)) {
@@ -162,7 +182,7 @@
 		description: "horrible clown from cool remake",
 		createdAt: new Date('2018-01-01'),
 		author: "Elon Musk",
-		photoLink: "images/image04.jpg",
+		photoLink: "images/image04.png",
 		hashtags: ["#it", "#clown", "#pennywise"],
 		likes: ["Arseny", "Donald Trump", "Ihar Dorashau"]
 	},
@@ -207,7 +227,7 @@
 		description: "horrible clown from cool remake",
 		createdAt: new Date('2018-01-01'),
 		author: "Elon Musk",
-		photoLink: "images/image04.jpg",
+		photoLink: "images/image04.png",
 		hashtags: ["#it", "#clown", "#pennywise"],
 		likes: ["Arseny", "Donald Trump", "Ihar Dorashau"]
 	},
@@ -252,7 +272,7 @@
 		description: "horrible clown from cool remake",
 		createdAt: new Date('2018-01-01'),
 		author: "Elon Musk",
-		photoLink: "images/image04.jpg",
+		photoLink: "images/image04.png",
 		hashtags: ["#it", "#clown", "#pennywise"],
 		likes: ["Arseny", "Donald Trump", "Ihar Dorashau"]
 	},
@@ -297,7 +317,7 @@
 		description: "horrible clown from cool remake",
 		createdAt: new Date('2018-01-01'),
 		author: "Elon Musk",
-		photoLink: "images/image04.jpg",
+		photoLink: "images/image04.png",
 		hashtags: ["#it", "#clown", "#pennywise"],
 		likes: ["Arseny", "Donald Trump", "Ihar Dorashau"]
 	},
@@ -318,8 +338,8 @@
 
 
 
-	PhotoPosts = new PhotoPosts(posts);
-	console.log('getPhotoPost with id = 10');
+	window.photoPosts = new PhotoPosts(posts);
+	/*console.log('getPhotoPost with id = 10');
 	console.log(PhotoPosts.getPhotoPost('10'));
 	console.log('getPhotoPost with invalid id(type = number)');
 	console.log(PhotoPosts.getPhotoPost(10));
@@ -371,6 +391,6 @@
 	var posts = PhotoPosts.getPhotoPosts(0, 10, {author: "Ihar Dorashau"});
 	for (let i = 0; i < posts.length; ++i) {
 		console.log(posts[i]);
-	}
+	}*/
 	
 })();

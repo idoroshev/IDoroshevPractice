@@ -1,158 +1,70 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 	<head>
-		<meta charset='UTF-8'>
-		<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="styles/styles.css">
 		<link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet"> 
 		<link href="https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope" rel="stylesheet"> 
-		<link rel="icon" href='images/icon.png'>
+		<link rel="icon" href="images/icon.png">
 		<script src="scripts/index.js" defer></script>
+		<script src="scripts/dom.js" defer></script>
 		<title>Dorogram</title>
 	</head>
 	<body>
-		<div class='header'>
+		<header>
 			<img src="images/icon.png" class="small-image">
-			<div class='name-header'>
+			<div class="name-header">
 				Dorogram
 			</div>
-			<button class='base-button-style'>
+			<button id="new-post" class="base-button-style" style="display: none">
 				New post
 			</button>
-			<div class='user-info'>
-				<div class='username'>
-					Username
+			<div class="user-info">
+				<div id="username" class="username">
+				Guest
 				</div>
-				<button class='base-button-style' height='22px'>
-					Log out
+				<button id="log-in-out" class="base-button-style" height="22px">
+					Log in
 				</button>
 			</div>
-		</div>
-		<div class='main'>
-			<div class='filters-wrapper'>
-				<div class='filters'>
-					<input class="filter" placeholder="Filter by name...">
-					<input class="filter" placeholder="Filter by date...">
-					<input class="filter" placeholder="Filter by hashtag...">
+		</header>
+		<main>
+			<div class="filters-wrapper">
+				<div class="filters">
+					<input class="filter" list="authors" placeholder="Filter by name...">
+					<datalist id="authors"></datalist>
+
+					<input class="filter" list="hashtags" placeholder="Filter by hashtag...">
+					<datalist id="hashtags"></datalist>
+
 				</div>
-				<button class='apply-button'>
+				<div class="date-filters">
+					<label for="dateFrom" class="label-date">Date from:</label>
+		            <input id="dateFrom" class="date-filter" type='date' />
+		        </div>
+		        <div class="date-filters">
+		            <label for="dateTo" class="label-date">Date to:</label>
+		            <input id="dateTo" class="date-filter" type='date'/>
+				</div>
+				<button class="apply-button">
 					Apply filters
 				</button>
 			</div>
-			<div class='feed'>
-				<div  class='post'>
-					<div class='post-top'>
-						<span class='post-username'>Username</span>
-						<span class='time'>13:34 03.03.2018</span>
-					</div>
-					<img src="images/post_picture.jpg" class='post-image'>
-					<div class='toolbar'>
-						<img src="images/heart.png" class='small-image'>
-						<img src="images/trash.png" class='small-image'>
-						<img src="images/edit.png" class='small-image'>
-					</div>
-					<div class='description-bar'>
-						<p class='description'>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-						</p>
-						<p class='hashtags'>
-							#cool #animal #alcohol
-						</p>
-					</div>
-				</div>
-				<div  class='post'>
-					<div class='post-top'>
-						<span class='post-username'>Username</span>
-						<span class='time'>13:34 03.03.2018</span>
-					</div>
-					<img src="images/post_picture.jpg" class='post-image'>
-					<div class='toolbar'>
-						<img src="images/heart.png" class='small-image'>
-						<img src="images/trash.png" class='small-image'>
-						<img src="images/edit.png" class='small-image'>
-					</div>
-					<div class='description-bar'>
-						<p class='description'>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-						</p>
-						<p class='hashtags'>
-							#cool #animal #alcohol
-						</p>
-					</div>
-				</div>
-				<div  class='post'>
-					<div class='post-top'>
-						<span class='post-username'>Username</span>
-						<span class='time'>13:34 03.03.2018</span>
-					</div>
-					<img src="images/post_picture.jpg" class='post-image'>
-					<div class='toolbar'>
-						<img src="images/heart.png" class='small-image'>
-						<img src="images/trash.png" class='small-image'>
-						<img src="images/edit.png" class='small-image'>
-					</div>
-					<div class='description-bar'>
-						<p class='description'>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-						</p>
-						<p class='hashtags'>
-							#cool #animal #alcohol
-						</p>
-					</div>
-				</div>
-				<div  class='post'>
-					<div class='post-top'>
-						<span class='post-username'>Username</span>
-						<span class='time'>13:34 03.03.2018</span>
-					</div>
-					<img src="images/post_picture.jpg" class='post-image'>
-					<div class='toolbar'>
-						<img src="images/heart.png" class='small-image'>
-						<img src="images/trash.png" class='small-image'>
-						<img src="images/edit.png" class='small-image'>
-					</div>
-					<div class='description-bar'>
-						<p class='description'>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-						</p>
-						<p class='hashtags'>
-							#cool #animal #alcohol
-						</p>
-					</div>
-				</div>
-				<div  class='post'>
-					<div class='post-top'>
-						<span class='post-username'>Username</span>
-						<span class='time'>13:34 03.03.2018</span>
-					</div>
-					<img src="images/post_picture.jpg" class='post-image'>
-					<div class='toolbar'>
-						<img src="images/heart.png" class='small-image'>
-						<img src="images/trash.png" class='small-image'>
-						<img src="images/edit.png" class='small-image'>
-					</div>
-					<div class='description-bar'>
-						<p class='description'>
-							Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-						</p>
-						<p class='hashtags'>
-							#cool #animal #alcohol
-						</p>
-					</div>
-				</div>
-				<button class='base-button-style'>
-					Load more
-				</button>
+			<div id='feed' class="feed">
 			</div>
-		</div>
-		<div class='footer'>
-			<div class='name-footer'>
+			<button class="base-button-style">
+					Load more
+			</button>
+		</main>
+		<footer>
+			<div class="name-footer">
 				Dorogram
 			</div>
-			<div class='my-info'>
+			<div class="my-info">
 				&#9400; Dorogram, 2018<br>
 				igdor9399@gmail.com
 			</div>
-		</div>
+		</footer>
 	</body>
 </html>
