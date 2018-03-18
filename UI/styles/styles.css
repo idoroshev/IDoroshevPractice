@@ -2,7 +2,7 @@
 	box-sizing: border-box;
 }
 
-.header {
+header {
 	width: 100%;
 	background-color: #ffffff;
 	border-bottom: 0.5px #ccc solid;
@@ -16,7 +16,7 @@ html {
     padding: 0;
 }
 
-.main {
+main {
 	padding-top: 50px;
 	align-items: center;
     flex: 1 0 auto;
@@ -31,14 +31,14 @@ body {
     margin: 0;
     padding: 0;
     background-color: #fff
-	padding-bottom: 0px;
+	padding-bottom: 0;
 	background-repeat: no-repeat;
 	background-size: 100%;
 	background-attachment: fixed; 
 }
 
 
-.footer {
+footer {
 	width: 100%;
 	height: 53px;
 	background-color: #fff;
@@ -69,7 +69,7 @@ body {
 .name-footer {
 	color: #000
 	margin-right: auto;
-	margin-left: 0px;
+	margin-left: 0;
 }
 
 .base-button-style, .load-more, .apply-button {
@@ -179,20 +179,41 @@ body {
 }
 
 .filter {
-	width: 32%;
+	width: 50%;
 	margin: 10px;
-	padding: 2px 5px;
+	padding: 5px 5px;
 	background-color: rgba(255, 255, 255, 0.59);
 	border-radius: 5px;
 	border: 1px #aaa solid;
 }
 
-.filter:focus {
+.date-filter {
+	width: 65%;
+	margin: 5px;
+	padding: 5px 5px;
+	background-color: rgba(255, 255, 255, 0.59);
+	border-radius: 5px;
+	border: 1px #aaa solid;
+}
+
+.filter:focus, .date-filter:focus {
 	outline: none;
+}
+
+.label-date {
+	width: 30%;
 }
 
 
 .filters {
+	width: 80%;
+	margin: auto;
+	display: flex;
+	align-items: center;
+}
+
+.date-filters {
+	width: 40%;
 	margin: auto;
 	display: flex;
 	align-items: center;
