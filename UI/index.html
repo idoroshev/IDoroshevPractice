@@ -5,10 +5,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="styles/styles.css">
 		<link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet"> 
-		<link href="https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope" rel="stylesheet"> 
+		<link href="https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope" rel="stylesheet">
 		<link rel="icon" href="images/icon.png">
+		<script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 		<script src="scripts/index.js" defer></script>
 		<script src="scripts/dom.js" defer></script>
+		<script src="scripts/listeners.js" defer></script>
 		<title>Dorogram</title>
 	</head>
 	<body>
@@ -24,19 +26,24 @@
 				<div id="username" class="username">
 				Guest
 				</div>
-				<button id="log-in-out" class="base-button-style" height="22px">
+				<button id="log-in" class="base-button-style" height="22px">
 					Log in
+				</button>
+				<button id="log-out" class="base-button-style" height="22px">
+					Log Out
 				</button>
 			</div>
 		</header>
 		<main>
 			<div class="filters-wrapper">
 				<div class="filters">
-					<input class="filter" list="authors" placeholder="Filter by name...">
+					<input id="authorsInput" class="filter" list="authors" placeholder="Filter by name...">
 					<datalist id="authors"></datalist>
 
-					<input class="filter" list="hashtags" placeholder="Filter by hashtag...">
+					<input id="hastagsInput" class="filter" list="hashtags" placeholder="Filter by hashtag...">
 					<datalist id="hashtags"></datalist>
+
+					<div class="hashtag-list"></div>
 
 				</div>
 				<div class="date-filters">
@@ -53,7 +60,7 @@
 			</div>
 			<div id='feed' class="feed">
 			</div>
-			<button class="base-button-style">
+			<button id="loadMore" class="base-button-style">
 					Load more
 			</button>
 		</main>
@@ -66,5 +73,87 @@
 				igdor9399@gmail.com
 			</div>
 		</footer>
+
+		<!--log-in modal window-->
+		<div id="logInModal" class="modal" style="display:none">
+			<div class="modalContent">
+				<p id="signInPhrase">Sign in</p>
+				<p style="display: none" id="wrongInput">Wrong login or password!</p>
+				<input type="text" placeholder="Login" class="filterField" id="login">
+				<input type="password" placeholder="Password" class="filterField" id="password">
+				<button class="modalButton" id="loginButton">LOG IN</button>
+			</div>
+		</div>
+
+		<!-- template for hastag -->
+		<div style="display: none;" class="hashtag">
+			<span>hashtag</span>
+			<div class="hashtag-icon">
+				<i class="fas fa-times"></i>
+			</div>
+		</div>
+
+		<!--edit post modal window -->
+		<div id="editModal" class="modal input-style" style="display:none">
+			<div class="modalContent">
+				<div class="form-div">
+					<div>
+
+                        <div class="editPhoto">
+                            <img class="post-image"/>
+                        </div>
+						<div class="name"> <input name="name" readonly type="text" /></div>
+						<div class="date"> <input name="date" readonly type="text" /></div>
+						<div class="hashtags">
+							<input name="hashtags" list="editHashtags" type='text' placeholder='#hashtag'/>
+							<datalist id="editHashtags"></datalist>
+						</div>
+						<div class="hashtag-list"></div>
+
+						<div class="description">
+							<textarea class="description" maxlength="300" name="description"  placeholder="Description"></textarea>
+						</div>
+
+						<button class="modalButton" id="editButton">EDIT</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!--create post modal window -->
+		<div id="createModal" class="modal input-style" style="display:none">
+			<div class="modalContent">
+				<div class="form-div">
+					<div>
+
+						<div class="drop-area">
+							<input type="file" id="fileElement" accept="image/*">
+							<img class="image post-image"/>
+						</div>
+
+						<div class="editPhoto">
+							<img class="post-image"/>
+						</div>
+						<div class="name"> <input name="name" readonly type="text" /></div>
+						<div class="date"> <input name="date" readonly type="text" /></div>
+						<div class="hashtags">
+							<input name="hashtags" list="createHashtags" type='text' placeholder='#hashtag'/>
+							<datalist id="createHashtags"></datalist>
+						</div>
+						<div class="hashtag-list"></div>
+
+						<div class="description">
+							<textarea class="description" maxlength="300" name="description"  placeholder="Description"></textarea>
+						</div>
+
+						<button class="modalButton" id="createButton">CREATE</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
 	</body>
 </html>
