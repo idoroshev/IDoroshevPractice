@@ -30,7 +30,7 @@ main {
 body {
     margin: 0;
     padding: 0;
-    background-color: #fff
+    background-color: #fff;
 	padding-bottom: 0;
 	background-repeat: no-repeat;
 	background-size: 100%;
@@ -59,15 +59,15 @@ footer {
 .username {
 	font-size: 20px;
 	font-family: 'Anton', sans-serif;
-	color: #000
+	color: #000;
 }
 
 .name-header {
-	color: #000
+	color: #000;
 }
 
 .name-footer {
-	color: #000
+	color: #000;
 	margin-right: auto;
 	margin-left: 0;
 }
@@ -172,10 +172,8 @@ footer {
 	max-height: 100%;
 }
 
-.hashtags{
+.hashtags {
 	margin: auto;
-	height: 100%;
-	max-height: 100%;
 }
 
 .filter {
@@ -235,3 +233,101 @@ footer {
 	margin: 0;
 	padding: 0;
 }
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.4);
+}
+
+.modalContent {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	margin: 5% auto;
+	border: 1px solid #888;
+	width: 50%;
+	text-align: center;
+}
+
+.modal input {
+	outline: 0;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+.input-style input, textarea {
+	font-size: 20px;
+	font-family: 'Annie Use Your Telescope', cursive;
+}
+
+.modalButton {
+	text-transform: uppercase;
+	outline: 0;
+	background: #aaa;
+	width: 100%;
+	border: 0;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.modalButton:hover {
+	background-color: #888888;
+}
+
+
+#wrongInput {
+	color: red;
+}
+
+.hashtag {
+	display: flex;
+	margin: 20px;
+	padding: 3px 10px 3px 10px;
+	background-color: white;
+	display: flex;
+	flex-flow: row;
+	justify-content: space-between;
+	color: black;
+}
+
+.hashtag-icon {
+	size: 14px;
+	padding-left: 10px;
+}
+
+.fa-heart {
+	font-size: 28px;
+}
+
+
+.form-div {
+	display: flex;
+	background-color:white;
+	padding: 35px 35px 50px;
+	margin-top:30px;
+	overflow: auto;
+}
+
+.description {
+	width: 100%;
+	height: 150px;
+	line-height: 150%;
+	resize:vertical;
+}
+
