@@ -1,0 +1,760 @@
+{
+	"info": {
+		"_postman_id": "e8a70057-1b56-457a-bc42-6ba42f0edfb4",
+		"name": "testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "home",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "0fb50bbe-8635-4759-8eff-1a26f5c58418",
+					"name": "home",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Accept-Ranges",
+							"value": "bytes",
+							"name": "Accept-Ranges",
+							"description": "Content-Types that are acceptable"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "public, max-age=0",
+							"name": "Cache-Control",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "4991",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=UTF-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 09 May 2018 15:26:46 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"137f-162a63240b0\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Last-Modified",
+							"value": "Sun, 08 Apr 2018 16:58:54 GMT",
+							"name": "Last-Modified",
+							"description": "The last modified date for the requested object, in RFC 2822 format"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"body": "<!DOCTYPE html>\n<html lang=\"en\">\n\t<head>\n\t\t<meta charset=\"UTF-8\">\n\t\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/styles.css\">\n\t\t<link href=\"https://fonts.googleapis.com/css?family=Anton\" rel=\"stylesheet\"> \n\t\t<link href=\"https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope\" rel=\"stylesheet\">\n\t\t<link rel=\"icon\" href=\"images/icon.png\">\n\t\t<script defer src=\"https://use.fontawesome.com/releases/v5.0.7/js/all.js\"></script>\n\t\t<script src=\"scripts/index.js\" defer></script>\n\t\t<script src=\"scripts/dom.js\" defer></script>\n\t\t<script src=\"scripts/listeners.js\" defer></script>\n\t\t<title>Dorogram</title>\n\t</head>\n\t<body>\n\t\t<header>\n\t\t\t<img src=\"images/icon.png\" class=\"small-image\">\n\t\t\t<div class=\"name-header\">\n\t\t\t\tDorogram\n\t\t\t</div>\n\t\t\t<button id=\"new-post\" class=\"base-button-style\" style=\"display: none\">\n\t\t\t\tNew post\n\t\t\t</button>\n\t\t\t<div class=\"user-info\">\n\t\t\t\t<div id=\"username\" class=\"username\">\n\t\t\t\tGuest\n\t\t\t\t</div>\n\t\t\t\t<button id=\"log-in\" class=\"base-button-style\" height=\"22px\">\n\t\t\t\t\tLog in\n\t\t\t\t</button>\n\t\t\t\t<button id=\"log-out\" class=\"base-button-style\" height=\"22px\">\n\t\t\t\t\tLog Out\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t</header>\n\t\t<main>\n\t\t\t<div class=\"filters-wrapper\">\n\t\t\t\t<div class=\"filters\">\n\t\t\t\t\t<input id=\"authorsInput\" class=\"filter\" list=\"authors\" placeholder=\"Filter by name...\">\n\t\t\t\t\t<datalist id=\"authors\"></datalist>\n\n\t\t\t\t\t<input id=\"hastagsInput\" class=\"filter\" list=\"hashtags\" placeholder=\"Filter by hashtag...\">\n\t\t\t\t\t<datalist id=\"hashtags\"></datalist>\n\n\t\t\t\t\t<div class=\"hashtag-list\"></div>\n\n\t\t\t\t</div>\n\t\t\t\t<div class=\"date-filters\">\n\t\t\t\t\t<label for=\"dateFrom\" class=\"label-date\">Date from:</label>\n\t\t            <input id=\"dateFrom\" class=\"date-filter\" type='date' />\n\t\t        </div>\n\t\t        <div class=\"date-filters\">\n\t\t            <label for=\"dateTo\" class=\"label-date\">Date to:</label>\n\t\t            <input id=\"dateTo\" class=\"date-filter\" type='date'/>\n\t\t\t\t</div>\n\t\t\t\t<button class=\"apply-button\">\n\t\t\t\t\tApply filters\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t\t<div id='feed' class=\"feed\">\n\t\t\t</div>\n\t\t\t<button id=\"loadMore\" class=\"base-button-style\">\n\t\t\t\t\tLoad more\n\t\t\t</button>\n\t\t</main>\n\t\t<footer>\n\t\t\t<div class=\"name-footer\">\n\t\t\t\tDorogram\n\t\t\t</div>\n\t\t\t<div class=\"my-info\">\n\t\t\t\t&#9400; Dorogram, 2018<br>\n\t\t\t\tigdor9399@gmail.com\n\t\t\t</div>\n\t\t</footer>\n\n\t\t<!--log-in modal window-->\n\t\t<div id=\"logInModal\" class=\"modal\" style=\"display:none\">\n\t\t\t<div class=\"modalContent\">\n\t\t\t\t<p id=\"signInPhrase\">Sign in</p>\n\t\t\t\t<p style=\"display: none\" id=\"wrongInput\">Wrong login or password!</p>\n\t\t\t\t<input type=\"text\" placeholder=\"Login\" class=\"filterField\" id=\"login\">\n\t\t\t\t<input type=\"password\" placeholder=\"Password\" class=\"filterField\" id=\"password\">\n\t\t\t\t<button class=\"modalButton\" id=\"loginButton\">LOG IN</button>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<!-- template for hastag -->\n\t\t<div style=\"display: none;\" class=\"hashtag\">\n\t\t\t<span>hashtag</span>\n\t\t\t<div class=\"hashtag-icon\">\n\t\t\t\t<i class=\"fas fa-times\"></i>\n\t\t\t</div>\n\t\t</div>\n\n\t\t<!--edit post modal window -->\n\t\t<div id=\"editModal\" class=\"modal input-style\" style=\"display:none\">\n\t\t\t<div class=\"modalContent\">\n\t\t\t\t<div class=\"form-div\">\n\t\t\t\t\t<div>\n\n                        <div class=\"editPhoto\">\n                            <img class=\"post-image\"/>\n                        </div>\n\t\t\t\t\t\t<div class=\"name\"> <input name=\"name\" readonly type=\"text\" /></div>\n\t\t\t\t\t\t<div class=\"date\"> <input name=\"date\" readonly type=\"text\" /></div>\n\t\t\t\t\t\t<div class=\"hashtags\">\n\t\t\t\t\t\t\t<input name=\"hashtags\" list=\"editHashtags\" type='text' placeholder='#hashtag'/>\n\t\t\t\t\t\t\t<datalist id=\"editHashtags\"></datalist>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"hashtag-list\"></div>\n\n\t\t\t\t\t\t<div class=\"description\">\n\t\t\t\t\t\t\t<textarea class=\"description\" maxlength=\"300\" name=\"description\"  placeholder=\"Description\"></textarea>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<button class=\"modalButton\" id=\"editButton\">EDIT</button>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t</div>\n\t\t</div>\n\n\t\t<!--create post modal window -->\n\t\t<div id=\"createModal\" class=\"modal input-style\" style=\"display:none\">\n\t\t\t<div class=\"modalContent\">\n\t\t\t\t<div class=\"form-div\">\n\t\t\t\t\t<div>\n\n\t\t\t\t\t\t<div class=\"drop-area\">\n\t\t\t\t\t\t\t<input type=\"file\" id=\"fileElement\" accept=\"image/*\">\n\t\t\t\t\t\t\t<img class=\"image post-image\"/>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<div class=\"editPhoto\">\n\t\t\t\t\t\t\t<img class=\"post-image\"/>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"name\"> <input name=\"name\" readonly type=\"text\" /></div>\n\t\t\t\t\t\t<div class=\"date\"> <input name=\"date\" readonly type=\"text\" /></div>\n\t\t\t\t\t\t<div class=\"hashtags\">\n\t\t\t\t\t\t\t<input name=\"hashtags\" list=\"createHashtags\" type='text' placeholder='#hashtag'/>\n\t\t\t\t\t\t\t<datalist id=\"createHashtags\"></datalist>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class=\"hashtag-list\"></div>\n\n\t\t\t\t\t\t<div class=\"description\">\n\t\t\t\t\t\t\t<textarea class=\"description\" maxlength=\"300\" name=\"description\"  placeholder=\"Description\"></textarea>\n\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t<button class=\"modalButton\" id=\"createButton\">CREATE</button>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\n\t\t\t</div>\n\t\t</div>\n\n\n\t</body>\n</html>"
+				}
+			]
+		},
+		{
+			"name": "posts.json",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/posts.json",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"posts.json"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "07dd1f25-7275-4fae-800d-08b5bcdf0cf8",
+					"name": "posts.json",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/posts.json",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"posts.json"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Accept-Ranges",
+							"value": "bytes",
+							"name": "Accept-Ranges",
+							"description": "Content-Types that are acceptable"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "public, max-age=0",
+							"name": "Cache-Control",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "441",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 09 May 2018 15:24:40 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1b9-162ed367198\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "Last-Modified",
+							"value": "Sun, 22 Apr 2018 11:56:31 GMT",
+							"name": "Last-Modified",
+							"description": "The last modified date for the requested object, in RFC 2822 format"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"body": "[{\"id\":\"20\",\"description\":\"kek\",\"createdAt\":\"2018-04-04T00:00:00.000Z\",\"author\":\"Ihar\",\"photoLink\":\"images/image05.jpg\",\"hashtags\":[\"#scenery\"],\"likes\":[\"Elon Musk\",\"Donald Trump\",\"Arseny\",\"Ihar\",{\"nickname\":\"Ihar\"}],\"deleted\":false},{\"description\":\"funny picture with a squirrel\",\"createdAt\":\"2018-04-04T00:00:00.000Z\",\"author\":\"Ihar\",\"photoLink\":\"images/image01.jpg\",\"hashtags\":[\"#squirrel\",\"#funny\"],\"id\":\"1524397841308\",\"deleted\":false}]"
+				}
+			]
+		},
+		{
+			"name": "getPhotoPost",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/getPhotoPost?id=20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getPhotoPost"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "5bef2bee-672b-44c0-a6cf-aa838e5d15cf",
+					"name": "getPhotoPost",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/getPhotoPost?id=20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"getPhotoPost"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 09 May 2018 15:29:11 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json",
+							"name": "content-type",
+							"description": "The mime type of this content"
+						}
+					],
+					"cookie": [],
+					"body": "{\"id\":\"20\",\"description\":\"kek\",\"createdAt\":\"2018-04-04T00:00:00.000Z\",\"author\":\"Ihar\",\"photoLink\":\"images/image05.jpg\",\"hashtags\":[\"#scenery\"],\"likes\":[\"Elon Musk\",\"Donald Trump\",\"Arseny\",\"Ihar\",{\"nickname\":\"Ihar\"}],\"deleted\":false}"
+				}
+			]
+		},
+		{
+			"name": "getPhotoPosts",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"author\": \"Ihar\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/getPhotoPosts?skip=0&top=9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"getPhotoPosts"
+					],
+					"query": [
+						{
+							"key": "skip",
+							"value": "0"
+						},
+						{
+							"key": "top",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "583c9084-2f49-46c7-a424-27ecf45e5873",
+					"name": "getPhotoPosts",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": false
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"author\": \"Ihar\"}"
+						},
+						"url": {
+							"raw": "http://localhost:8081/getPhotoPosts?skip=0&top=9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"getPhotoPosts"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "top",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "441",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 09 May 2018 15:29:18 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1b9-3ufL3yJ7c5Bl6p898ioac9TnpDY\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"body": "[{\"id\":\"20\",\"description\":\"kek\",\"createdAt\":\"2018-04-04T00:00:00.000Z\",\"author\":\"Ihar\",\"photoLink\":\"images/image05.jpg\",\"hashtags\":[\"#scenery\"],\"likes\":[\"Elon Musk\",\"Donald Trump\",\"Arseny\",\"Ihar\",{\"nickname\":\"Ihar\"}],\"deleted\":false},{\"description\":\"funny picture with a squirrel\",\"createdAt\":\"2018-04-04T00:00:00.000Z\",\"author\":\"Ihar\",\"photoLink\":\"images/image01.jpg\",\"hashtags\":[\"#squirrel\",\"#funny\"],\"id\":\"1524397841308\",\"deleted\":false}]"
+				}
+			]
+		},
+		{
+			"name": "authors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/authors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"authors"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "254e1b2f-2055-49b1-945e-5e8082f5fc2d",
+					"name": "authors",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/authors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"authors"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "93",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 09 May 2018 15:29:24 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5d-CqxPF/syKoQ+h+g8EbWTHTlHIEE\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"body": "\"[{\\\"username\\\":\\\"Elon\\\",\\\"password\\\":\\\"123\\\"},{\\\"username\\\":\\\"Ihar\\\",\\\"password\\\":\\\"321\\\"}]\""
+				}
+			]
+		},
+		{
+			"name": "hashtags",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/hashtags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"hashtags"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "08d1cce5-1468-4902-bc3e-d09300429dd8",
+					"name": "hashtags",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/hashtags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"hashtags"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "41",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 09 May 2018 15:29:30 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"29-5KUkbKvOGtWP3B/KbiHKQQGkjlE\"",
+							"name": "ETag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express",
+							"name": "X-Powered-By",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"body": "\"[\\\"#scenery\\\",\\\"#squirrel\\\",\\\"#funny\\\"]\""
+				}
+			]
+		},
+		{
+			"name": "updatePosts",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n    \"id\": \"19\",\n    \"description\": \"horrible clown from cool remake\",\n    \"createdAt\": \"2018-01-01T00:00:00.000Z\",\n    \"author\": \"Elon Musk\",\n    \"photoLink\": \"images/image04.png\",\n    \"hashtags\": [\n      \"#it\",\n      \"#clown\",\n      \"#pennywise\"\n    ],\n    \"likes\": [\n      \"Arseny\",\n      \"Donald Trump\",\n      \"Ihar Dorashau\"\n    ],\n    \"deleted\": false\n  },\n  {\n    \"id\": \"20\",\n    \"description\": \"beautiful scenery\",\n    \"createdAt\": \"2018-04-04T00:00:00.000Z\",\n    \"author\": \"Ihar\",\n    \"photoLink\": \"images/image05.jpg\",\n    \"hashtags\": [\n      \"#scenery\"\n    ],\n    \"likes\": [\n      \"Elon Musk\",\n      \"Donald Trump\",\n      \"Arseny\",\n      \"Ihar\"\n    ],\n    \"deleted\": false\n  }\n  ]"
+				},
+				"url": {
+					"raw": "http://localhost:8081/updatePosts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"updatePosts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addPhotoPost",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\":\"funny picture with a squirrel\",\"createdAt\":\"2018-04-04T00:00:00.000Z\",\"author\":\"Ihar\",\"photoLink\":\"images/image01.jpg\",\"hashtags\":[\"#squirrel\",\"#funny\"]}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/addPhotoPost",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"addPhotoPost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "likePhotoPost",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/likePhotoPost?id=20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"likePhotoPost"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "20"
+						},
+						{
+							"key": null,
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editPhotoPost",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"description\":\"kek\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/editPhotoPost?id=20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"editPhotoPost"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "removePhotoPost",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
