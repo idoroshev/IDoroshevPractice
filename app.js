@@ -145,7 +145,11 @@ app.post('/likePhotoPost', async (req, res) => {
     let posts = await readFile();
     let post = posts.find(x => x.id === id);
 
-    if (!user) return
+    if (!user) {
+        res.status(401);
+        res.end();
+        return;
+    }
 
     if (post.likes) {
         let hasMyLike = !!post.likes.find(x => x.nickname === user);
@@ -201,8 +205,10 @@ app.delete('/removePhotoPost', (req, res) => {
                 fs.writeFile(path.join(__dirname, 'public/posts.json'), JSON.stringify(posts), () => {
                     res.end();
                 })
+                return;
             }
         }
+        res.end();
     });
 });
 
