@@ -99,7 +99,7 @@ app.post('/getPhotoPosts', (req, res) => {
         posts.sort(function (a, b) {
             return Date.parse(b.createdAt) - Date.parse(a.createdAt);
         });
-        posts.slice(skip, skip + top);
+        posts = posts.slice(skip, skip + top);
 
         res.json(posts);
         res.end();

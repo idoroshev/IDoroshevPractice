@@ -47,7 +47,7 @@ class PhotoPostsController {
     }
 
     async reload(skip = 0, top = 10, filterConfig) {
-        fetch('/getPhotoPosts?offset=' + skip + '&top=' + top, {
+        fetch('/getPhotoPosts?skip=' + skip + '&top=' + top, {
             method: 'POST',
             body: filterConfig,
             headers: {
