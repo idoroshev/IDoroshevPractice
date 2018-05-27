@@ -4,7 +4,6 @@ let loginModal = document.getElementById('logInModal');
 let loadMore = document.getElementById('loadMore');
 
 fetch('/posts.json', {method: 'GET'}).then(res => {
-    console.log(res);
     return res.json().then(posts => {
 
         window.photoPosts = new PhotoPosts(posts);
@@ -150,22 +149,26 @@ fetch('/posts.json', {method: 'GET'}).then(res => {
                     hashtagsToAdd.push(value);
                 }
 
-            }
+            };
             createModal.querySelector('input[name=hashtags]').addEventListener('change', createHashtagListener);
             const createButtonListener = () => {
-                photoPostsController.addPhotoPost({
-                    id: Date.now().toString(),
-                    createdAt: new Date(),
-                    hashtags: hashtagsToAdd,
-                    author: localStorage.user,
-                    photoLink: img.src,
-                    description: createModal.querySelector('textarea').value,
-                    likes: []
-                });
+
+            	const post = {
+		            id: Date.now().toString(),
+		            createdAt: new Date(),
+		            hashtags: hashtagsToAdd,
+		            author: localStorage.user,
+		            photoLink: 'link',
+		            description: createModal.querySelector('textarea').value,
+		            likes: [],
+		            deleted: false
+	            };
+
+                photoPostsController.addPhotoPost(post, fileInput.files[0]);
                 createModal.style.display = 'none';
                 createModal.querySelector('#createButton').removeEventListener('click', createButtonListener);
                 createModal.querySelector('input[name=hashtags]').removeEventListener('change', createHashtagListener);
-            }
+            };
             createModal.querySelector('#createButton').addEventListener('click', createButtonListener);
 
         });
