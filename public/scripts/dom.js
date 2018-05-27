@@ -13,10 +13,11 @@ class PhotoPostsController {
         this.setButtonsDisplay();
     }
 
-    addPhotoPost(post) {
-        if (photoPosts.addPhotoPost(post)) {
-            this.reload(0, this.posts.length);
-        }
+    async addPhotoPost(post, file) {
+    	try {
+		    await photoPosts.addPhotoPost(post, file);
+		    this.reload(0, this.posts.length);
+	    } catch (e) { }
     }
 
     removePhotoPost(id) {
@@ -46,20 +47,25 @@ class PhotoPostsController {
         this.setButtonsDisplay();
     }
 
-    async reload(skip = 0, top = 10, filterConfig) {
-        fetch('/getPhotoPosts?skip=' + skip + '&top=' + top, {
-            method: 'POST',
-            body: filterConfig,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            res.json().then(posts => {
-                this.posts = posts;
-                this.deleteDomPosts();
-                this.showPhotoPostsElement();
-            })
-        })
+    reload(skip = 0, top = 10, filterConfig) {
+	    return new Promise((resolve) => {
+		    let xhr = new XMLHttpRequest();
+		    xhr.open('POST', '/getPhotoPosts?skip=' + skip + '&top=' + top);
+		    xhr.setRequestHeader('Accept', 'application/json');
+		    xhr.setRequestHeader('Content-type', 'application/json');
+
+		    xhr.onload = () => {
+			    if (xhr.status === 200) {
+				    resolve(xhr.responseText);
+			    }
+		    };
+
+		    xhr.send(JSON.stringify(filterConfig));
+	    }).then(posts => {
+	    	this.posts = JSON.parse(posts);
+		    this.deleteDomPosts();
+		    this.showPhotoPostsElement();
+	    });
     }
 
 
@@ -68,8 +74,8 @@ class PhotoPostsController {
     }
 
     deleteDomPosts() {
-        while (feed.firstChild)
-            feed.removeChild(feed.firstChild);
+        while (this.feed.firstChild)
+            this.feed.removeChild(this.feed.firstChild);
     }
 
     createPhotoPostElement(photoPost) {
@@ -174,7 +180,7 @@ class PhotoPostsController {
                         photoPost.hashtags.push(value);
                         hashtagList.appendChild(hashtagElement);
                     }
-                })
+                });
 
                 editModal.querySelector('#editButton').addEventListener('click', () => {
                     this.editPhotoPost(photoPost.id, {
@@ -257,7 +263,7 @@ class PhotoPostsController {
         let newPostButton = document.getElementById('new-post');
         newPostButton.style.display = this.isLogIn ? 'block' : 'none';
 
-        var toolbars = document.body.querySelectorAll('.toolbar');
+        let toolbars = document.body.querySelectorAll('.toolbar');
         toolbars.forEach(toolbar => {
             let imgs = toolbar.querySelectorAll('img');
             imgs.forEach(item => item.style.display = this.isLogIn ? 'block' : 'none');

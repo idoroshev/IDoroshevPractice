@@ -27,24 +27,26 @@ window.PhotoPosts = class PhotoPosts {
 
     }
 
-    async save() {
-        await fetch('/updatePosts', {
-            method: 'POST',
-            body: JSON.stringify(this.photoPosts),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+    save() {
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'updatePosts');
+        xhr.setRequestHeader('Content-type', 'application/json');
+        xhr.send(JSON.stringify(this.photoPosts));
     }
 
-    async getPhotoPosts(skip = 0, top = 10, filterConfig) {
-        await fetch('/getPhotoPosts?offset=' + skip + '&top=' + top, {
-            method: 'POST',
-            body: filterConfig,
-            headers: {
-            'Content-Type': 'application/json'
-            }
-        })
+    getPhotoPosts(skip = 0, top = 10, filterConfig) {
+      return new Promise((resolve) => {
+	      let xhr = new XMLHttpRequest();
+	      xhr.open('POST', '/getPhotoPosts?offset=' + skip + '&top=' + top);
+	      xhr.setRequestHeader('Content-type', 'application/json');
+
+	      xhr.onload = () => {
+	      	if (xhr.status === 200) {
+			    resolve(xhr.responseText);
+	      	}
+	      };
+	      xhr.send(JSON.stringify(filterConfig));
+      }).then(data => JSON.parse(data));
     }
 
     getPhotoPost(id) {
@@ -88,13 +90,33 @@ window.PhotoPosts = class PhotoPosts {
         return true;
     }
 
-    addPhotoPost(object) {
-        if (this.validatePhotoPost(object) && this.isUniqueId(object.id)) {
-            this.photoPosts.push(object);
-            this.save();
-            return true;
-        }
-        return false;
+   addPhotoPost(object, file) {
+	   if (this.validatePhotoPost(object) && this.isUniqueId(object.id)) {
+		   return new Promise((resolve, reject) => {
+			   let xhr = new XMLHttpRequest();
+			   xhr.open('POST', '/addPhotoPost');
+			   xhr.setRequestHeader('Accept', 'application/json');
+
+			   const formPost = new FormData();
+			   formPost.append('image', file);
+			   formPost.append('post', JSON.stringify(object));
+
+			   xhr.onload = () => {
+				   if (xhr.status === 200) {
+					   resolve(xhr.responseText);
+				   } else {
+					   reject(new Error(xhr.statusText));
+				   }
+			   };
+
+			   xhr.send(formPost);
+		   }).then((post) => {
+			   this.photoPosts.push(JSON.parse(post));
+		   })
+			   .catch((error) => {
+				   throw error;
+			   });
+	   }
     }
 
     clonePost(post) {
@@ -105,7 +127,7 @@ window.PhotoPosts = class PhotoPosts {
         return clone;
     }
 
-    editPhotoPost(id, newInfo) {
+    async editPhotoPost(id, newInfo) {
         for (let key in newInfo) {
             if (unchangeable.has(key)) {
                 throw new Error(`You can't change field: ${key}`);
@@ -116,7 +138,7 @@ window.PhotoPosts = class PhotoPosts {
                 var clone = this.clonePost(this.photoPosts[i]);
                 if (this.validatePhotoPost(Object.assign(clone, newInfo))) {
                     Object.assign(this.photoPosts[i], newInfo);
-                    this.save();
+                    await this.save();
                     return true;
                 }
             }
@@ -124,18 +146,18 @@ window.PhotoPosts = class PhotoPosts {
         return false;
     }
 
-    removePhotoPost(id) {
+    async removePhotoPost(id) {
         for (let i = 0; i < this.photoPosts.length; i++) {
             if (this.photoPosts[i].id === id) {
                 this.photoPosts.splice(i, 1);
-                this.save();
+                await this.save();
                 return true;
             }
         }
         return false;
     }
 
-    likePhotoPost(id) {
+    async likePhotoPost(id) {
         let likeAdded = false;
         let photoPost = this.getPhotoPost(id);
         if (this.hasMyLike(id)) {
@@ -145,7 +167,7 @@ window.PhotoPosts = class PhotoPosts {
             likeAdded = true;
         }
 
-        this.save();
+        await this.save();
         return likeAdded;
     }
 

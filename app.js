@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
+const multer = require('multer');
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
@@ -13,6 +14,14 @@ app.listen(8081, (err) => {
     }
     console.log('Server is listening on port 8081');
 });
+
+const storage = multer.diskStorage({
+	destination: path.join(__dirname, 'public/images/'),
+	filename: (req, file, callback) => {
+		callback(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+	},
+});
+const download = multer({ storage }).single('image');
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
@@ -68,10 +77,10 @@ app.post('/getPhotoPosts', (req, res) => {
     let filterConfig = req.body;
 
     fs.readFile(path.join(__dirname, 'public/posts.json'), (err, data) => {
-        if (err) throw err
-        let posts = JSON.parse(data)
+        if (err) throw err;
+        let posts = JSON.parse(data);
 
-        posts = posts.filter(x => !x.deleted)
+        posts = posts.filter(x => !x.deleted);
 
         if (filterConfig !== undefined) {
             if (filterConfig.hashtags) {
@@ -108,35 +117,38 @@ app.post('/getPhotoPosts', (req, res) => {
 
 app.post('/updatePosts', (req, res) => {
     let posts = req.body;
-    fs.writeFile(path.join(__dirname, 'public/posts.json'), JSON.stringify(posts), (err) => {
-        console.log(err);
+    fs.writeFile(path.join(__dirname, 'public/posts.json'), JSON.stringify(posts, null, 2), (err) => {
+        if (err) {
+        	throw err;
+        }
         res.end();
     });
+	res.status(200).end();
 });
 
 app.post('/addPhotoPost', (req, res) => {
-    let postToAdd = req.body;
+	download(req, res, (err) => {
+		if (err) throw err;
+		else {
+			try {
+				let postToAdd = JSON.parse(req.body.post);
+				postToAdd.photoLink = 'images/' + req.file.filename;
 
-    let date = new Date(postToAdd.createdAt);
-    postToAdd.createdAt = date;
-
-    postToAdd.id = Date.now().toString();
-    postToAdd.deleted = false;
-
-    try {
-        if (validatePhotoPost(postToAdd)) {
-            readFile().then(posts => {
-                posts.push(postToAdd);
-                fs.writeFile(path.join(__dirname, 'public/posts.json'), JSON.stringify(posts), () => {
-                    res.end();
-                });
-            })
-        }
-
-    } catch (e) {
-        res.writeHead(500);
-        res.end();
-    }
+				if (validatePhotoPost(postToAdd)) {
+					readFile().then(posts => {
+						posts.push(postToAdd);
+						fs.writeFile(path.join(__dirname, 'public/posts.json'), JSON.stringify(posts, null, 2), (err) => {
+							if (err) throw err;
+						});
+					})
+				}
+				res.json(postToAdd);
+			} catch (e) {
+				fs.unlink(req.file.path);
+				res.status(500).end();
+			}
+		}
+	});
 });
 
 app.post('/likePhotoPost', async (req, res) => {
@@ -183,10 +195,10 @@ app.put('/editPhotoPost', (req, res) => {
     readFile().then(posts => {
         for (let i = 0; i < posts.length; i++) {
             if (posts[i].id === id) {
-                var clone = clonePost(posts[i]);
+                let clone = clonePost(posts[i]);
                 if (validatePhotoPost(Object.assign(clone, newInfo))) {
                     Object.assign(posts[i], newInfo);
-                    fs.writeFile(path.join(__dirname, 'public/posts.json'), JSON.stringify(posts), () => {
+                    fs.writeFile(path.join(__dirname, 'public/posts.json'), JSON.stringify(posts, null, 2), () => {
                         res.end();
                     })
                 }
@@ -202,10 +214,9 @@ app.delete('/removePhotoPost', (req, res) => {
         for (let i = 0; i < posts.length; i++) {
             if (posts[i].id === id) {
                 posts.splice(i, 1);
-                fs.writeFile(path.join(__dirname, 'public/posts.json'), JSON.stringify(posts), () => {
+                fs.writeFile(path.join(__dirname, 'public/posts.json'), JSON.stringify(posts, null, 2), () => {
                     res.end();
-                })
-                return;
+                });
             }
         }
         res.end();
@@ -235,7 +246,7 @@ function readFile() {
 
 function writeFile(posts) {
     return new Promise((resolve, reject) => {
-        fs.writeFile(path.join(__dirname, 'public/posts.json'), JSON.stringify(posts), (err) => {
+        fs.writeFile(path.join(__dirname, 'public/posts.json'), JSON.stringify(posts, null, 2), (err) => {
             if (err) {
                 return reject(err);
             }
